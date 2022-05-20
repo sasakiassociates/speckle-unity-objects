@@ -1,0 +1,6 @@
+
+# Visual Studio crap
+*.vs/
+
+# Jetbains crap
+*.idea/

@@ -1,0 +1,30 @@
+{
+  "name": "com.speckle.converters",
+  "version": "1.0.0",
+  "displayName": "Speckle Component Converters",
+  "description": "Component Converters structure for speckle-unity",
+  "unity": "2020.3",
+  "license": "Apache-2.0",
+  "licensesUrl": "https://github.com/specklesystems/speckle-unity/blob/main/LICENSE",
+  "keywords": [
+    "speckle",
+    "speckle-core",
+    "speckle-objects",
+    "speckle-systems",
+    "speckle-unity",
+    "aec",
+    "version-control",
+    "interoperability"
+  ],
+  "author": {
+    "name": "Speckle Systems",
+    "email": "hello@speckle.systems",
+    "url": "https://speckle.systems"
+  },
+  "dependencies": {
+    "com.speckle.object": "1.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://package.openupm.com"
+  }
+}
