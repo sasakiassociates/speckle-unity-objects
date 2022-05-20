@@ -1,7 +1,7 @@
 {
   "name": "com.speckle.converters",
   "version": "1.0.0",
-  "displayName": "Speckle Component Converters",
+  "displayName": "Speckle Component Converter",
   "description": "Component Converters for passing Speckle Objects to Unity Components",
   "unity": "2020.3",
   "license": "Apache-2.0",
