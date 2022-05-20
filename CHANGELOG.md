@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/sasakiassociates/speckle-unity-converters/compare/v1.1.0...v1.1.1) (2022-05-20)
+
+
+### Bug Fixes
+
+* wrong name ([0bc1a83](https://github.com/sasakiassociates/speckle-unity-converters/commit/0bc1a83299e60a746c23e898fb1d4a5c8827b50a))
+
 # [1.1.0](https://github.com/sasakiassociates/speckle-unity-converters/compare/v1.0.0...v1.1.0) (2022-05-20)
 
 
