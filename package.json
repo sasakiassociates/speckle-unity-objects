@@ -22,7 +22,7 @@
     "url": "https://speckle.systems"
   },
   "dependencies": {
-    "com.speckle.object": "1.0.0"
+    "com.speckle.objects": "1.0.0"
   },
   "publishConfig": {
     "registry": "https://package.openupm.com"
