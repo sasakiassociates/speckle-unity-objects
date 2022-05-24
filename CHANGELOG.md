@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.1...v1.1.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* Package name ([88e2493](https://github.com/sasakiassociates/speckle-unity-objects/commit/88e24932e5c0d1fe12a81501c01220bb1feb210d))
+
 ## [1.1.1](https://github.com/sasakiassociates/speckle-unity-converters/compare/v1.1.0...v1.1.1) (2022-05-20)
 
 
