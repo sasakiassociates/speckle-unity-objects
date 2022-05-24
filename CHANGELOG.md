@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.2...v1.1.3) (2022-05-24)
+
+
+### Bug Fixes
+
+* Import Lib and pre-built converters ([f5988be](https://github.com/sasakiassociates/speckle-unity-objects/commit/f5988be436e387fc4426a51f2f638b6bbd4158a1))
+
 ## [1.1.2](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.1...v1.1.2) (2022-05-24)
 
 
