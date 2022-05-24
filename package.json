@@ -2,7 +2,7 @@
   "name": "com.speckle.objects",
   "version": "1.1.1",
   "displayName": "Speckle Objects",
-  "description": "A set of Speckle Objects as Unity Components",
+  "description": "A set of Speckle Objects converted to Unity",
   "unity": "2020.3",
   "license": "Apache-2.0",
   "licensesUrl": "https://github.com/specklesystems/speckle-unity/blob/main/LICENSE",
