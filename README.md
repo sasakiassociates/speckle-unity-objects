@@ -1,2 +1,2 @@
-# speckle-unity-converters
-Component Converter for Speckle Unity
+# speckle-unity-objects
+A set of Speckle Objects converted for Unity
