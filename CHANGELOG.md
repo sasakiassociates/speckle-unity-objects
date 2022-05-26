@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.3...v1.1.4) (2022-05-26)
+
+
+### Bug Fixes
+
+* changed package details ([79a5633](https://github.com/sasakiassociates/speckle-unity-objects/commit/79a563388d2ba843e98e5565ebb71ecbcdcffb1e))
+
 ## [1.1.3](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.2...v1.1.3) (2022-05-24)
 
 
