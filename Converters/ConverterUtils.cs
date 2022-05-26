@@ -40,7 +40,7 @@ namespace Speckle.ConnectorUnity.Converter
           {
             if (prop.Contains(key))
             {
-              SpeckleConnector.Console.Log($"Skipping prop {prop}");
+              SpeckleUnity.Console.Log($"Skipping prop {prop}");
               toggle = true;
               break;
             }
@@ -52,7 +52,7 @@ namespace Speckle.ConnectorUnity.Converter
         }
         catch (SpeckleException e)
         {
-          SpeckleConnector.Console.Warn(e.Message);
+          SpeckleUnity.Console.Warn(e.Message);
         }
     }
 

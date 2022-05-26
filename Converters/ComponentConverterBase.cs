@@ -22,7 +22,7 @@ namespace Speckle.ConnectorUnity.Converter
 			//   return RecurseTreeToNative(bs);
 			// }
 
-			SpeckleConnector.Console.Log(name + "does not support converting yet");
+			SpeckleUnity.Console.Log(name + "does not support converting yet");
 			return null;
 		}
 		protected override Base ConvertComponent(BaseBehaviour component) => throw new System.NotImplementedException();

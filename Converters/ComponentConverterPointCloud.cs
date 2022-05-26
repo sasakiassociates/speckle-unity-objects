@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Speckle.ConnectorUnity.Converter
 {
-  [CreateAssetMenu(fileName = "PointCloudConverter", menuName = "Speckle/PointCloud Converter")]
-  public class ComponentConverterPointCloud : ComponentConverter<Pointcloud, ParticleSystem>
-  {
+	[CreateAssetMenu(fileName = nameof(ComponentConverterPointCloud), menuName = "Speckle/Converters/Create PointCloud Converter")]
+	public class ComponentConverterPointCloud : ComponentConverter<Pointcloud, ParticleSystem>
+	{
 
-    protected override GameObject ConvertBase(Pointcloud @base) => throw new NotImplementedException();
-    protected override Base ConvertComponent(ParticleSystem component) => throw new NotImplementedException();
-  }
+		protected override GameObject ConvertBase(Pointcloud @base) => throw new NotImplementedException();
+		protected override Base ConvertComponent(ParticleSystem component) => throw new NotImplementedException();
+	}
 
 }

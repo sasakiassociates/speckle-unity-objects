@@ -6,17 +6,7 @@ namespace Speckle.ConnectorUnity.Converter
 {
   public static partial class ConverterUtils
   {
-
-    public static void SafeDestroy(Object obj)
-    {
-      if (Application.isPlaying)
-        Object.Destroy(obj);
-
-      else
-        Object.DestroyImmediate(obj);
-
-    }
-
+    
     public static Mesh SafeMeshGet(this MeshFilter mf) => Application.isPlaying ? mf.mesh : mf.sharedMesh;
 
     public static void SafeMeshSet(this GameObject go, Mesh m, bool addMeshFilterIfNotFound = true)
