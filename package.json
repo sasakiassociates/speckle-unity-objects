@@ -22,6 +22,6 @@
     "url": "https://speckle.systems"
   },
   "dependencies": {
-    "com.speckle.core": "1.0.4"
+    "com.speckle.core": "1.0.5"
   }
 }
