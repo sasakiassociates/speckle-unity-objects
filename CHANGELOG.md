@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.5...v1.1.6) (2022-05-27)
+
+
+### Bug Fixes
+
+* bumped speckle core ([b8a0077](https://github.com/sasakiassociates/speckle-unity-objects/commit/b8a0077b09bfcbf7ec13984f29766c2e6f1b4daa))
+
 ## [1.1.5](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.4...v1.1.5) (2022-05-26)
 
 
