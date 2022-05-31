@@ -12,8 +12,13 @@ namespace Speckle.ConnectorUnity.Converter
 	public class ConverterUnity : ScriptableSpeckleConverter
 	{
 
+		[SerializeField] private ComponentConverterBase defaultConverter;
+
 		private void OnEnable()
 		{
+			if (defaultConverter == null)
+				defaultConverter = CreateInstance<ComponentConverterBase>();
+
 			if (!converters.Valid())
 				converters = new List<ComponentConverter>
 				{
@@ -21,52 +26,19 @@ namespace Speckle.ConnectorUnity.Converter
 					CreateInstance<ComponentConverterPolyline>(),
 					CreateInstance<ComponentConverterPoint>(),
 					CreateInstance<ComponentConverterPointCloud>(),
-					CreateInstance<ComponentConverterView3D>()
+					CreateInstance<ComponentConverterView3D>(),
+					CreateInstance<ComponentConverterBrep>()
 				};
 		}
 
 		public override Base ConvertToSpeckle(object @object)
 		{
-			// convert for unity types
-			// we have to figure out what is being passed into there.. it could be a single component that we want to convert
-			// or it could be root game object with children we want to handle... for now we will assume this is handled in the loop checks from the client objs
-			// or it can be a game object with multiple components that we want to convert
-			List<Component> comps = new List<Component>();
-			switch (@object)
-			{
-				case GameObject o:
-					comps = o.GetComponents(typeof(Component)).ToList();
-					break;
-				case Component o:
-					comps = new List<Component>() { o };
-					break;
-				case null:
-					Debug.LogWarning("Trying to convert null object to speckle");
-					break;
-				default:
-					Debug.LogException(new SpeckleException($"Native unity object {@object.GetType()} is not supported"));
-					break;
-			}
+			if (TryGetConverter(@object, out var comp, out var converter))
+				return converter.ToSpeckle(comp);
 
-			if (!comps.Any())
-			{
-				Debug.LogWarning("No comps were found in the object trying to be covnerted :(");
-				return null;
-			}
-
-			// TODO : handle when there is multiple convertable object types on game object
-			foreach (var comp in comps)
-			{
-				var type = comp.GetType().ToString();
-
-				foreach (var converter in converters)
-				{
-					if (converter.unity_type.Equals(type))
-						return converter.ToSpeckle(comp);
-				}
-			}
-
+			
 			Debug.LogWarning("No components found for converting to speckle");
+
 			return null;
 		}
 
@@ -97,7 +69,6 @@ namespace Speckle.ConnectorUnity.Converter
 				go.AddComponent<BaseBehaviour>().properties = new SpeckleProperties
 					{ Data = @base.FetchProps() };
 
-				
 				var res = ConvertToNative(mesh) as Component;
 				res.transform.SetParent(go.transform);
 				return res.gameObject;
@@ -115,21 +86,18 @@ namespace Speckle.ConnectorUnity.Converter
 				displayValues.transform.SetParent(go.transform);
 
 				foreach (var b in bs)
-				{
 					if (b is Mesh displayMesh)
 					{
 						var obj = ConvertToNative(displayMesh) as GameObject;
 						if (obj != null)
 							obj.transform.SetParent(displayValues.transform);
 					}
-				}
 				return go;
 			}
 
 			Debug.LogWarning($"Skipping {@base.GetType()} {@base.id} - Not supported type");
 			return null;
 		}
-
 	}
 
 }

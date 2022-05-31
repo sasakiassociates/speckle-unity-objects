@@ -1,6 +1,5 @@
 ﻿using System;
 using Objects.Geometry;
-using Speckle.ConnectorUnity.Converter;
 using Speckle.Core.Models;
 using UnityEngine;
 

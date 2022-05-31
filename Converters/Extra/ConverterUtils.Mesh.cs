@@ -10,7 +10,7 @@ using Mesh = Objects.Geometry.Mesh;
 
 namespace Speckle.ConnectorUnity.Converter
 {
-	public static class ComponentConverterHelper
+	public static partial class ConverterUtils
 	{
 
 		private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
@@ -27,13 +27,13 @@ namespace Speckle.ConnectorUnity.Converter
 			speckleMesh.AlignVerticesWithTexCoordsByIndex();
 			speckleMesh.TriangulateMesh();
 
-			int indexOffset = data.vertices.Count;
+			var indexOffset = data.vertices.Count;
 
 			// Convert Vertices
 			data.vertices.AddRange(speckleMesh.vertices.ArrayToPoints(speckleMesh.units));
 
 			// Convert texture coordinates
-			bool hasValidUVs = speckleMesh.TextureCoordinatesCount == speckleMesh.VerticesCount;
+			var hasValidUVs = speckleMesh.TextureCoordinatesCount == speckleMesh.VerticesCount;
 			if (speckleMesh.textureCoordinates.Count > 0 && !hasValidUVs)
 				Debug.LogWarning(
 					$"Expected number of UV coordinates to equal vertices. Got {speckleMesh.TextureCoordinatesCount} expected {speckleMesh.VerticesCount}. \nID = {speckleMesh.id}");
@@ -41,7 +41,7 @@ namespace Speckle.ConnectorUnity.Converter
 			if (hasValidUVs)
 			{
 				data.uvs.Capacity += speckleMesh.TextureCoordinatesCount;
-				for (int j = 0; j < speckleMesh.TextureCoordinatesCount; j++)
+				for (var j = 0; j < speckleMesh.TextureCoordinatesCount; j++)
 				{
 					var (u, v) = speckleMesh.GetTextureCoordinate(j);
 					data.uvs.Add(new Vector2((float)u, (float)v));
@@ -58,15 +58,11 @@ namespace Speckle.ConnectorUnity.Converter
 			if (speckleMesh.colors != null)
 			{
 				if (speckleMesh.colors.Count == speckleMesh.VerticesCount)
-				{
 					data.vertexColors.AddRange(speckleMesh.colors.Select(c => c.ToUnityColor()));
-				}
 				else if (speckleMesh.colors.Count != 0)
-				{
 					//TODO what if only some submeshes have colors?
 					Debug.LogWarning(
 						$"{typeof(Mesh)} {speckleMesh.id} has invalid number of vertex {nameof(Mesh.colors)}. Expected 0 or {speckleMesh.VerticesCount}, got {speckleMesh.colors.Count}");
-				}
 			}
 
 			var tris = new List<int>();
@@ -74,7 +70,7 @@ namespace Speckle.ConnectorUnity.Converter
 			// Convert faces
 			tris.Capacity += (int)(speckleMesh.faces.Count / 4f) * 3;
 
-			for (int i = 0; i < speckleMesh.faces.Count; i += 4)
+			for (var i = 0; i < speckleMesh.faces.Count; i += 4)
 			{
 				//We can safely assume all faces are triangles since we called TriangulateMesh
 				tris.Add(speckleMesh.faces[i + 1] + indexOffset);
@@ -85,11 +81,76 @@ namespace Speckle.ConnectorUnity.Converter
 			data.subMeshes.Add(tris);
 		}
 
+		public static Mesh MeshToSpeckle(this ISpeckleMeshConverter converter, MeshFilter component)
+		{
+			var nativeMesh = IsRuntime ? component.mesh : component.sharedMesh;
+
+			var nTriangles = nativeMesh.triangles;
+			var sFaces = new List<int>(nTriangles.Length * 4);
+			for (var i = 2; i < nTriangles.Length; i += 3)
+			{
+				sFaces.Add(0); //Triangle cardinality indicator
+
+				sFaces.Add(nTriangles[i]);
+				sFaces.Add(nTriangles[i - 1]);
+				sFaces.Add(nTriangles[i - 2]);
+			}
+
+			var nVertices = nativeMesh.vertices;
+			var sVertices = new List<double>(nVertices.Length * 3);
+
+			foreach (var vertex in nVertices)
+			{
+				var p = component.gameObject.transform.TransformPoint(vertex);
+				sVertices.Add(p.x);
+				sVertices.Add(p.z); //z and y swapped
+				sVertices.Add(p.y);
+			}
+
+			var nColors = nativeMesh.colors;
+			var sColors = new List<int>(nColors.Length);
+			sColors.AddRange(nColors.Select(c => c.ToIntColor()));
+
+			var nTexCoords = nativeMesh.uv;
+			var sTexCoords = new List<double>(nTexCoords.Length * 2);
+			foreach (var uv in nTexCoords)
+			{
+				sTexCoords.Add(uv.x);
+				sTexCoords.Add(uv.y);
+			}
+
+			// NOTE: this throws some exceptions with trying to set a method that isn't settable.
+			// Looking at other converters it seems like the conversion code should be handling all the prop settings..
+
+			//
+			// // get the speckle data from the go here
+			// // so that if the go comes from speckle, typed props will get overridden below
+			// // TODO: Maybe handle a better way of overriding props? Or maybe this is just the typical logic for connectors 
+			// if (convertProps)
+			// {
+			//   // Base behaviour is the standard unity mono type that stores the speckle props data
+			//   var baseBehaviour = component.GetComponent(typeof(BaseBehaviour)) as BaseBehaviour;
+			//   if (baseBehaviour != null && baseBehaviour.properties != null)
+			//   {
+			//     baseBehaviour.properties.AttachUnityProperties(mesh, excludedProps);
+			//   }
+			// }
+
+			return new Mesh
+			{
+				vertices = sVertices,
+				faces = sFaces,
+				colors = sColors,
+				textureCoordinates = sTexCoords,
+				units = ModelUnits
+			};
+		}
+
 		public static GameObject MeshToNative(this ISpeckleMeshConverter converter, IReadOnlyCollection<Mesh> meshes, GameObject obj)
 		{
 			var materials = new List<Material>(meshes.Count);
 
-			var data = new MeshData()
+			var data = new MeshData
 			{
 				uvs = new List<Vector2>(),
 				vertices = new List<Vector3>(),
@@ -97,7 +158,7 @@ namespace Speckle.ConnectorUnity.Converter
 				vertexColors = new List<Color>()
 			};
 
-			foreach (Mesh speckleMesh in meshes)
+			foreach (var speckleMesh in meshes)
 			{
 				if (speckleMesh.vertices.Count == 0 || speckleMesh.faces.Count == 0) continue;
 
@@ -120,7 +181,7 @@ namespace Speckle.ConnectorUnity.Converter
 			nativeMesh.SetUVs(0, data.uvs);
 			nativeMesh.SetColors(data.vertexColors);
 
-			int j = 0;
+			var j = 0;
 			foreach (var subMeshTriangles in data.subMeshes)
 			{
 				nativeMesh.SetTriangles(subMeshTriangles, j);
@@ -136,10 +197,10 @@ namespace Speckle.ConnectorUnity.Converter
 			nativeMesh.RecalculateTangents();
 
 			var filter = obj.GetComponent<MeshFilter>();
-			
+
 			if (filter == null)
 				filter = obj.AddComponent<MeshFilter>();
-			
+
 			if (IsRuntime)
 				filter.mesh = nativeMesh;
 			else
@@ -178,13 +239,11 @@ namespace Speckle.ConnectorUnity.Converter
 				Material matByName = null;
 
 				foreach (var _mat in converter.contextObjects)
-				{
 					if (((Material)_mat.NativeObject).name == renderMaterial.name)
 					{
 						if (matByName == null) matByName = (Material)_mat.NativeObject;
 						else Debug.LogWarning("There is more than one Material with the name \'" + renderMaterial.name + "\'!", (Material)_mat.NativeObject);
 					}
-				}
 				if (matByName != null) return matByName;
 
 				// 2. re-create material by setting diffuse color and transparency on standard shaders
@@ -215,6 +274,5 @@ namespace Speckle.ConnectorUnity.Converter
 			// 3. if not renderMaterial was passed, the default shader will be used 
 			return converter.defaultMaterial;
 		}
-
 	}
 }

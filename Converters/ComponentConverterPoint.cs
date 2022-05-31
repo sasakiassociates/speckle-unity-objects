@@ -1,5 +1,4 @@
 ﻿using Objects.Geometry;
-using Speckle.ConnectorUnity.Converter;
 using Speckle.Core.Models;
 using UnityEngine;
 
@@ -16,9 +15,6 @@ namespace Speckle.ConnectorUnity.Converter
 			return ptn.gameObject;
 		}
 
-		protected override Base ConvertComponent(SpecklePoint component)
-		{
-			return component.pos.ToSpeckle();
-		}
+		protected override Base ConvertComponent(SpecklePoint component) => component.pos.ToSpeckle();
 	}
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Speckle.ConnectorUnity.Mono;
 using Speckle.Core.Models;
 using UnityEngine;
 
 namespace Speckle.ConnectorUnity.Converter
 {
+
+	[CreateAssetMenu(fileName = nameof(ComponentConverterBase), menuName = "Speckle/Converters/Create Base Converter")]
 	public class ComponentConverterBase : ComponentConverter<Base, BaseBehaviour>
 	{
 
@@ -25,6 +27,6 @@ namespace Speckle.ConnectorUnity.Converter
 			SpeckleUnity.Console.Log(name + "does not support converting yet");
 			return null;
 		}
-		protected override Base ConvertComponent(BaseBehaviour component) => throw new System.NotImplementedException();
+		protected override Base ConvertComponent(BaseBehaviour component) => throw new NotImplementedException();
 	}
 }
