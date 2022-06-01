@@ -15,9 +15,20 @@ This pacakge can be installed with [OpenUpm](https://github.com/openupm/openupm-
 
 
 ## Roadmap
+>This pacakge is in active development, please be aware of any breaking changes if you plan on using this pacakge. (sorry for the bad packaging tags)
 
-All roadmap information is available in the main package repo, [speckle-unity-connector](https://github.com/sasakiassociates/speckle-unity-connector)  
-
+| Version | Defining Feature|
+| ------- | -------------------------------------------------------------------------------- |
+| ~1.1.1~   | ~Package structure~|
+| ~1.1.2~   | ~Deconstruct code from main repo for objects and converters~|
+| ~1.1.3~   | ~Mesh Converter~|
+| ~1.1.4~   | ~Line Converter~|
+| ~1.1.5~   | ~Brep Converter~ |
+| ~1.1.6~   | ~Point Converter~|
+| ~1.1.7~   | ~Default Converter~ |
+| 1.1.8     | Point Cloud Converter|
+| 1.1.9     | Basic BIM Converter  |
+| 1.2.0     | Block Converter |
 
 ### Additional 
 There are additional packages in active development.
