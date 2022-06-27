@@ -8,12 +8,12 @@ namespace Speckle.ConnectorUnity.Converter
 	public class ComponentConverterView3D : ComponentConverter<View3D, Camera>
 	{
 
-    /// <summary>
-    ///   Converts a Speckle View3D to a GameObject
-    /// </summary>
-    /// <param name="base"></param>
-    /// <returns></returns>
-    protected override GameObject ConvertBase(View3D @base)
+		/// <summary>
+		///   Converts a Speckle View3D to a GameObject
+		/// </summary>
+		/// <param name="base"></param>
+		/// <returns></returns>
+		protected override GameObject ConvertBase(View3D @base)
 		{
 			var comp = BuildGo(@base.name);
 

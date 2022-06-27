@@ -1,16 +1,16 @@
 ## [1.1.7](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.6...v1.1.7) (2022-05-31)
 
-
 ### Bug Fixes
 
-* bumping for core ([aa81c40](https://github.com/sasakiassociates/speckle-unity-objects/commit/aa81c40af1ff6e4c11028e8696e02271daffae21))
+* bumping for
+  core ([aa81c40](https://github.com/sasakiassociates/speckle-unity-objects/commit/aa81c40af1ff6e4c11028e8696e02271daffae21))
 
 ## [1.1.6](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.5...v1.1.6) (2022-05-27)
 
-
 ### Bug Fixes
 
-* bumped speckle core ([b8a0077](https://github.com/sasakiassociates/speckle-unity-objects/commit/b8a0077b09bfcbf7ec13984f29766c2e6f1b4daa))
+* bumped speckle
+  core ([b8a0077](https://github.com/sasakiassociates/speckle-unity-objects/commit/b8a0077b09bfcbf7ec13984f29766c2e6f1b4daa))
 
 ## [1.1.5](https://github.com/sasakiassociates/speckle-unity-objects/compare/v1.1.4...v1.1.5) (2022-05-26)
 
@@ -59,4 +59,5 @@
 ### Features
 
 *
+
 Skeleton ([3430a8e](https://github.com/sasakiassociates/speckle-unity-converters/commit/3430a8ea86f312c1e75540c3b9a2d2b835f3305d))

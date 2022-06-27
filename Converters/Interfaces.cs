@@ -8,7 +8,7 @@ namespace Speckle.ConnectorUnity.Converter
 	{
 		public List<ApplicationPlaceholderObject> contextObjects { get; set; }
 	}
-	
+
 	public interface ISpeckleMeshConverter : IWantContextObj
 	{
 		public bool addMeshCollider { get; }

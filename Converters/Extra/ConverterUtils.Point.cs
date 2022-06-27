@@ -9,15 +9,15 @@ namespace Speckle.ConnectorUnity.Converter
 	public static partial class ConverterUtils
 
 	{
-    /// <summary>
-    ///   switch y and z
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <param name="units"></param>
-    /// <returns></returns>
-    public static Vector3 VectorByCoordinates(double x, double y, double z, string units) =>
+		/// <summary>
+		///   switch y and z
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="z"></param>
+		/// <param name="units"></param>
+		/// <returns></returns>
+		public static Vector3 VectorByCoordinates(double x, double y, double z, string units) =>
 			new((float)ScaleToNative(x, units), (float)ScaleToNative(z, units), (float)ScaleToNative(y, units));
 
 		public static Vector ToSpeckle(this Vector3 pos, bool flipYZ = true) => flipYZ ? new Vector(pos.x, pos.z, pos.y) : new Vector(pos.x, pos.y, pos.z);
@@ -73,15 +73,15 @@ namespace Speckle.ConnectorUnity.Converter
 
 			return points;
 		}
-    /// <summary>
-    /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    /// <param name="units"></param>
-    /// <param name="flipYZ"></param>
-    /// <returns></returns>
-    public static Vector3 ToVector3(double x, double y, double z, string units, bool flipYZ = true) =>
+		/// <summary>
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="z"></param>
+		/// <param name="units"></param>
+		/// <param name="flipYZ"></param>
+		/// <returns></returns>
+		public static Vector3 ToVector3(double x, double y, double z, string units, bool flipYZ = true) =>
 			// switch y and z
 			flipYZ ?
 				new Vector3(

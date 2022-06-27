@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Speckle.Core.Models;
 using UnityEngine;
 using Mesh = Objects.Geometry.Mesh;
@@ -11,11 +10,15 @@ namespace Speckle.ConnectorUnity.Converter
 	public class ComponentConverterMesh : ComponentConverter<Mesh, MeshFilter>, ISpeckleMeshConverter
 	{
 
-		[SerializeField] private bool _addMeshCollider;
-		[SerializeField] private bool _addRenderer = true;
-		[SerializeField] private bool _recenterTransform = true;
-		[SerializeField] private bool _useRenderMaterial;
-		[SerializeField] private Material _defaultMaterial;
+		[SerializeField] bool _addMeshCollider;
+
+		[SerializeField] bool _addRenderer = true;
+
+		[SerializeField] bool _recenterTransform = true;
+
+		[SerializeField] bool _useRenderMaterial;
+
+		[SerializeField] Material _defaultMaterial;
 
 		protected override HashSet<string> excludedProps
 		{
@@ -71,10 +74,7 @@ namespace Speckle.ConnectorUnity.Converter
 
 		// copied from repo
 		//TODO: support multiple filters?
-		protected override Base ConvertComponent(MeshFilter component)
-		{
-			return this.MeshToSpeckle(component);
-		}
+		protected override Base ConvertComponent(MeshFilter component) => this.MeshToSpeckle(component);
 	}
 
 }

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Speckle.ConnectorUnity.Mono;
-using Speckle.Core.Logging;
 using Speckle.Core.Models;
 using UnityEngine;
 using Mesh = Objects.Geometry.Mesh;
@@ -11,10 +9,9 @@ namespace Speckle.ConnectorUnity.Converter
 	[CreateAssetMenu(fileName = "UnityConverter", menuName = "Speckle/Speckle Unity Converter", order = -1)]
 	public class ConverterUnity : ScriptableSpeckleConverter
 	{
+		[SerializeField] ComponentConverterBase defaultConverter;
 
-		[SerializeField] private ComponentConverterBase defaultConverter;
-
-		private void OnEnable()
+		void OnEnable()
 		{
 			if (defaultConverter == null)
 				defaultConverter = CreateInstance<ComponentConverterBase>();
@@ -31,35 +28,14 @@ namespace Speckle.ConnectorUnity.Converter
 				};
 		}
 
-		public override Base ConvertToSpeckle(object @object)
-		{
-			if (TryGetConverter(@object, out var comp, out var converter))
-				return converter.ToSpeckle(comp);
-
-			
-			Debug.LogWarning("No components found for converting to speckle");
-
-			return null;
-		}
-
 		public override object ConvertToNative(Base @base)
 		{
-			if (@base == null)
-			{
-				Debug.LogWarning("Trying to convert a null object! Beep Beep! I don't like that");
-				return null;
-			}
+			var res = base.ConvertToNative(@base) ?? TryConvertDefault(@base);
 
-			foreach (var converter in converters)
-				if (converter.speckle_type.Equals(@base.speckle_type))
-					return converter.ToNative(@base);
-
-			Debug.Log($"No Converters were found to handle {@base.speckle_type} trying for display value");
-
-			return TryConvertDefault(@base);
+			return res;
 		}
 
-		private GameObject TryConvertDefault(Base @base)
+		GameObject TryConvertDefault(Base @base)
 		{
 			if (@base["displayValue"] is Mesh mesh)
 			{
@@ -92,10 +68,10 @@ namespace Speckle.ConnectorUnity.Converter
 						if (obj != null)
 							obj.transform.SetParent(displayValues.transform);
 					}
+
 				return go;
 			}
 
-			Debug.LogWarning($"Skipping {@base.GetType()} {@base.id} - Not supported type");
 			return null;
 		}
 	}

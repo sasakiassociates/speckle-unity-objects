@@ -5,6 +5,9 @@ namespace Speckle.ConnectorUnity
 {
 	public class SpeckleBrep : BaseBehaviour
 	{
-		public MeshFilter mesh => gameObject.GetComponent<MeshFilter>();
+		public MeshFilter mesh
+		{
+			get => gameObject.GetComponent<MeshFilter>();
+		}
 	}
 }

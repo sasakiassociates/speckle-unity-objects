@@ -12,10 +12,10 @@ namespace Speckle.ConnectorUnity.Converter
 {
 	public static partial class ConverterUtils
 	{
-    /// <summary>
-    ///   the default Unity units are meters
-    /// </summary>
-    public const string ModelUnits = Units.Meters;
+		/// <summary>
+		///   the default Unity units are meters
+		/// </summary>
+		public const string ModelUnits = Units.Meters;
 
 		public static Dictionary<string, object> FetchProps<TBase>(this TBase @base) where TBase : Base
 		{

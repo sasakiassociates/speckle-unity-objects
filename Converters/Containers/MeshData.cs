@@ -7,8 +7,11 @@ namespace Speckle.ConnectorUnity.Converter
 	{
 
 		public List<Vector2> uvs;
+
 		public List<Color> vertexColors;
+
 		public List<Vector3> vertices;
+
 		public List<List<int>> subMeshes;
 	}
 }

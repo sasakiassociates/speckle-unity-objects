@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Objects.Geometry;
 using Speckle.Core.Models;
 using UnityEngine;
@@ -9,11 +8,15 @@ namespace Speckle.ConnectorUnity.Converter
 	[CreateAssetMenu(fileName = nameof(ComponentConverterBrep), menuName = "Speckle/Converters/Create Brep Converter")]
 	public class ComponentConverterBrep : ComponentConverter<Brep, SpeckleBrep>, ISpeckleMeshConverter
 	{
-		[SerializeField] private bool _addMeshCollider;
-		[SerializeField] private bool _addRenderer = true;
-		[SerializeField] private bool _recenterTransform = true;
-		[SerializeField] private bool _useRenderMaterial;
-		[SerializeField] private Material _defaultMaterial;
+		[SerializeField] bool _addMeshCollider;
+
+		[SerializeField] bool _addRenderer = true;
+
+		[SerializeField] bool _recenterTransform = true;
+
+		[SerializeField] bool _useRenderMaterial;
+
+		[SerializeField] Material _defaultMaterial;
 
 		public List<ApplicationPlaceholderObject> contextObjects { get; set; }
 
@@ -41,14 +44,8 @@ namespace Speckle.ConnectorUnity.Converter
 			get => _defaultMaterial;
 		}
 
-		protected override Base ConvertComponent(SpeckleBrep component)
-		{
-			return this.MeshToSpeckle(component.mesh);
-		}
+		protected override Base ConvertComponent(SpeckleBrep component) => this.MeshToSpeckle(component.mesh);
 
-		protected override GameObject ConvertBase(Brep @base)
-		{
-			return this.MeshToNative(@base.displayValue, BuildGo().gameObject);
-		}
+		protected override GameObject ConvertBase(Brep @base) => this.MeshToNative(@base.displayValue, BuildGo().gameObject);
 	}
 }
